@@ -8,7 +8,7 @@ Scenario A: SunToWater
 
 * Your team is tasked with updating the core IT infrastructure of a recent GlobeX acquisition, SunToWater. SunToWater's mission is to make water-from-air drinking water more accessible to families. This ecological, energy-conversion focus aligns well with the mission of GlobeX, but unfortunately, its IT systems do not.
 
-* Because SunToWater currently lacks a client-server, domained network, your team is assigned with developing a repeatable means of standing up a DC to oversee SunToWater's network. The AD will need to automatically populate users and OUs in accordance with the organizational chart below:[orgchart1](https://drive.google.com/file/d/1PlwfzDsyQ_DB55CUZHhVj6TUMxBTrYlH/view)
+* Because SunToWater currently lacks a client-server, domained network, your team is assigned with developing a repeatable means of standing up a DC to oversee SunToWater's network. The AD will need to automatically populate users and OUs in accordance with the organizational chart :[orgchart1](https://drive.google.com/file/d/1PlwfzDsyQ_DB55CUZHhVj6TUMxBTrYlH/view)
 
    * Objective: Develop as a team a singular Powershell script that, when executed on a new installation of Windows Server, can fully standup all requisite services to make the server into a DC. Minimum required components of the script are listed in the Project Guidelines document. Each individual of the team is to contribute their share of the overall script and document their individual contribution. The final script should reflect an equal effort from all team members.
 
