@@ -12,7 +12,7 @@ Scenario A: SunToWater
 
 [orgchart1](https://drive.google.com/file/d/1PlwfzDsyQ_DB55CUZHhVj6TUMxBTrYlH/view)
 
-  * Objective: Develop as a team a singular Powershell script that, when executed on a new installation of Windows Server, can fully standup all requisite services to make the server into a DC. Minimum required components of the script are listed in the Project Guidelines document. Each individual of the team is to contribute their share of the overall script and document their individual contribution. The final script should reflect an equal effort from all team members.
+   * Objective: Develop as a team a singular Powershell script that, when executed on a new installation of Windows Server, can fully standup all requisite services to make the server into a DC. Minimum required components of the script are listed in the Project Guidelines document. Each individual of the team is to contribute their share of the overall script and document their individual contribution. The final script should reflect an equal effort from all team members.
 
 For the purposes of this project, only a single Windows 10 endpoint is required for demonstrating synchronization with the domain.
 
