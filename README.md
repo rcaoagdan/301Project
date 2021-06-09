@@ -12,7 +12,7 @@ Scenario A: SunToWater
 
    * Objective: Develop as a team a singular Powershell script that, when executed on a new installation of Windows Server, can fully standup all requisite services to make the server into a DC. Minimum required components of the script are listed in the [Project Guidelines](https://github.com/codefellows/seattle-ops-301n1/blob/main/class-15/project-guidelines.md) document. Each individual of the team is to contribute their share of the overall script and document their individual contribution. The final script should reflect an equal effort from all team members.
 
-For the purposes of this project, only a single Windows 10 endpoint is required for demonstrating synchronization with the domain.
+    For the purposes of this project, only a single Windows 10 endpoint is required for demonstrating synchronization with the domain.
 
 * Another pain point that GlobeX is experiencing is securely communicating to SunToWater's network resources. The VP of Special Projects has explicitly requested your team develop a secure solution for data transmission between the two networks, and demonstrate successful resource access in your upcoming presentation to the executive team.
 
