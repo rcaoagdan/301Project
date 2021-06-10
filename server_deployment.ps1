@@ -13,27 +13,26 @@
 #   -RADIUS
 
 ##############################################################################
-# Assign Windows Server Static IPv4 Address                                                                         
+# Assign Windows Server Static IPv4 Address   
+# Insert IP addressess where ""                                                                     
 ##############################################################################
+New-NetIPAddress -IPAddress "" -PrefixLength 24 -DefaultGateway "" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
 
-
 ##############################################################################
-# Assign Windows Server VM a DNS                                                                           
+# Assign Window Server a DNS          
+# set ip address between "" use a , for two addresses                                                            
 ##############################################################################
+Set-DnsClientServerAddress -InterfaceIndex(Get-NetAdapter).InterfaceIndex -ServerAddresses ""
 
 ##############################################################################
 # Install AD Domain-Services        
 # Add Domain Controller
 # Add AD Forest        
-# Renames Server  
-# Install DNS     
-                                                    
+# Renames Server   
 ##############################################################################
-
 Get-WindowsFeature -Name AD-Domain-Services | Install-WindowsFeature
 Import-Module ADDSDeployment
 Install-ADDSForest -DomainName GlobeXPrimary.local -DomainNetbiosName GlobeXPrimary -IntallDNS
-
 ##############################################################################
 #  Create OUs                                                                          
 ##############################################################################
