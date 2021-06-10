@@ -25,7 +25,7 @@
 ##############################################################################
 # Rename Windows Server                                                                           
 ##############################################################################
-Rename-Computer -NewName GlobeXPrimary
+
 
 ##############################################################################
 # Install AD Domain-Services        
@@ -35,7 +35,7 @@ Rename-Computer -NewName GlobeXPrimary
 
 Get-WindowsFeature -Name AD-Domain-Services | Install-WindowsFeature
 Import-Module ADDSDeployment
-Install-ADDSForest -DomainName GlobeXPrimary.local
+Install-ADDSForest -DomainName GlobeXPrimary.local -DomainNetbiosName GlobeXPrimary
 
 ##############################################################################
 #  Create OUs                                                                          
