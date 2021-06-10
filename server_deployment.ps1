@@ -25,7 +25,7 @@
 ##############################################################################
 # Rename Windows Server                                                                           
 ##############################################################################
-
+Rename-Computer -NewName GlobeXPrimary
 
 ##############################################################################
 # Install AD Domain-Services        
@@ -33,17 +33,9 @@
 # Add AD Forest                                                                   
 ##############################################################################
 
-Install-WindowsFeature AD-Domain-Services
-ADD-WindowsFeature RSAT-Role-Tools
-ADD-WindowsFeature gpmc
+Get-WindowsFeature -Name AD-Domain-Services | Install-WindowsFeature
 Import-Module ADDSDeployment
-Install-ADDSForest `
--DomainName "corp.GlobeXPrimary.local" `
--DomainNetbiosName "GlobeXPrimary" `
--SafeModeAdministratorPassword $pass`
--NoRebootOnCompletion:$false `
--SysvolPath "C:\Windows\SYSVOL" `
--Force:$true
+Install-ADDSForest -DomainName GlobeXPrimary.local
 
 ##############################################################################
 #  Create OUs                                                                          
