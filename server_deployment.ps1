@@ -33,10 +33,18 @@
 # Add AD Forest                                                                   
 ##############################################################################
 
-# Get-WindowsFeature AD-Domain-Services
-# Install-ADDSDomainController 
-
-
+Install-WindowsFeature AD-Domain-Services
+ADD-WindowsFeature RSAT-Role-Tools
+ADD-WindowsFeature gpmc
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-DomainName "corp.GlobeXPrimary.local" `
+-DomainNetbiosName "GlobeXPrimary" `
+-SafeModeAdministratorPassword $pass`
+-InstallDns:$true `
+-NoRebootOnCompletion:$false `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
 ##############################################################################
 #  Create OUs                                                                          
 ##############################################################################
