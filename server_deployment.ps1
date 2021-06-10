@@ -21,21 +21,18 @@
 # Assign Windows Server VM a DNS                                                                           
 ##############################################################################
 
-
-##############################################################################
-# Rename Windows Server                                                                           
-##############################################################################
-
-
 ##############################################################################
 # Install AD Domain-Services        
 # Add Domain Controller
-# Add AD Forest                                                                   
+# Add AD Forest        
+# Renames Server  
+# Install DNS     
+                                                    
 ##############################################################################
 
 Get-WindowsFeature -Name AD-Domain-Services | Install-WindowsFeature
 Import-Module ADDSDeployment
-Install-ADDSForest -DomainName GlobeXPrimary.local -DomainNetbiosName GlobeXPrimary
+Install-ADDSForest -DomainName GlobeXPrimary.local -DomainNetbiosName GlobeXPrimary -IntallDNS
 
 ##############################################################################
 #  Create OUs                                                                          
