@@ -41,10 +41,10 @@ Install-ADDSForest `
 -DomainName "corp.GlobeXPrimary.local" `
 -DomainNetbiosName "GlobeXPrimary" `
 -SafeModeAdministratorPassword $pass`
--InstallDns:$true `
 -NoRebootOnCompletion:$false `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
+
 ##############################################################################
 #  Create OUs                                                                          
 ##############################################################################
