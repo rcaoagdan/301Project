@@ -63,7 +63,7 @@ function installAD {
 
 ##############################################################################
 # Assign Windows Server Static IPv4 Address   
-# Insert IP addressess where ""                                                                     
+# Commented out command can be used outside of AWS                                                                    
 ##############################################################################
 
 function printIPset {
@@ -100,9 +100,11 @@ function confrimIP {
     Write-Output " The Static IP is : $staticIPadd and the Gateway : $gatewayIP"
     $statConfirm = Read-Host "Confirm Y/N "
     if($statConfirm -eq "Y"){
-        New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+        #New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+        New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex 6
     }elseif ($statConfirm -eq "y") {
-        New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+        #New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+        New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex 6
     }elseif ($statConfirm -eq "N") {
         setStaticIP
     }elseif ($statConfirm -eq "n") {
@@ -115,7 +117,7 @@ function confrimIP {
 
 ##############################################################################
 # Assign Window Server a DNS          
-# set ip address between "" use a , for two addresses                                                            
+# Commented out command can be used outside of AWS                                                          
 ##############################################################################
 function checkDNSstat {
     Write-Output "Checking if DNS Role is currently Installed"
@@ -144,7 +146,8 @@ function manageDNS {
 
 function currentDNS {
     Write-Output "Current DNS Settings "
-    Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+    #Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex(Get-NetAdapter).InterfaceIndex
+    Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex 6
     manage2DNS
 }
 function manage2DNS{
