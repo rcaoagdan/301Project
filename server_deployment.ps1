@@ -29,15 +29,19 @@ function mainmenu {
         Write-Output "Installing Active Directory `n"
         installAD
     }elseif ($userinput -eq 2) {
+        Write-Output " "
         setStaticIP
     }elseif ($userinput -eq 3) {
-        Write-Output "Manage DNS `n"
+        Write-Output " "
         manageDNS
     }elseif ($userinput -eq 4) {
+        Write-Output " "
         manageOU
     }elseif ($userinput -eq 5) {
+        Write-Output " "
         createUSER
     }elseif ($userinput -eq 6) {
+        Write-Output " "
         installRAD
     }else {
         Write-Output "In correct Selection `n"
@@ -126,6 +130,8 @@ function manageDNS {
 
 function manage2DNS{
 
+    Write-Output "Current DNS Settings "
+    Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex(Get-NetAdapter).InterfaceIndex
     $dnsopt2 = Read-Host "Shall We Assign a DNS Y/N"
     if($dnsopt2 -eq "Y"){
         setDNS
@@ -213,6 +219,7 @@ function manageOU {
 function addOU {
     $ouNAME = Read-Host "Enter Organizational Unit Name "
     New-ADOrganizationalunit -Name $ouName
+    Get-ADOrganizationalUnit -Identity "OU=$ouName,DC=GlobeXPrimary,DC=Local"
     $ouOPT2 = Read-Host "Would you like to add another Y/N?"
     if ($OUopt2 -eq "Y"){
         addOU
@@ -230,7 +237,8 @@ function addOU {
 
 function delOU {
     $ouDEL = Read-Host "Enter Organizational Unit Name "
-    Remove-ADOrganizationalunit -Identity $ouDEL
+    Get-ADOrganizationalUnit -Identity "OU=$ouDEL,DC=GlobeXPrimary,DC=Local" | set-ADOrganizationalUnit -ProtectedFromAccidentalDeletion $false
+    Remove-ADOrganizationalunit -Identity "OU=$ouDEL,DC=GlobeXPrimary,DC=Local" -Confirm:$false
     $ouOPT3 = Read-Host "Would you like to Remove another Y/N?"
     if ($OUopt3 -eq "Y"){
         addOU
