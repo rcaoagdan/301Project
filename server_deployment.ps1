@@ -20,8 +20,8 @@ function mainmenu {
     Write-Output "1. Install Active Directory - Adds DC, Forest, Rename Server"
     Write-Output "2. Change Static IP Address"
     Write-Output "3. Manage DNS"
-    Write-Output "4. Add OU"
-    Write-Output "5. Create Users"
+    Write-Output "4. Manage Organizational Unit"
+    Write-Output "5. Mange Users"
     Write-Output "6. Install RADIUS"
     $userinput = Read-Host "Option"
 
@@ -30,9 +30,9 @@ function mainmenu {
     }elseif ($userinput -eq 2) {
         setStaticIP
     }elseif ($userinput -eq 3) {
-        optDNS
+        manageDNS
     }elseif ($userinput -eq 4) {
-        createOU
+        manageOU
     }elseif ($userinput -eq 5) {
         createUSER
     }elseif ($userinput -eq 6) {
@@ -95,19 +95,23 @@ function setStaticIP{
 # Assign Window Server a DNS          
 # set ip address between "" use a , for two addresses                                                            
 ##############################################################################
-function optDNS {
+function manageDNS {
 
     Write-Output "Checking if DNS Role is currently Installed"
     Get-WindowsFeature | where {($_.name -like "DNS")}
     $dnsopt1 = Read-Host "Does DNS need to be installed Y/N | M for main menu"
     if($dnsopt1 -eq "Y"){
         Install-WindowsFeature DNS -IncludeManagementTools
+        Write-Output " "
+        manageDNS
     }elseif ($dnsopt1 -eq "y"){
         Install-WindowsFeature DNS -IncludeManagementTools
+        Write-Output " "
+        manageDNS
     }elseif ($dnsopt1 -eq "N"){
-        opt2DNS
+        manage2DNS
     }elseif ($dnsopt1 -eq "n") {
-        opt2DNS
+        manage2DNS
     }elseif ($dnsopt1 -eq "M") {
         mainmenu
     }elseif ($dnsopt1 -eq "m") {
@@ -115,11 +119,11 @@ function optDNS {
     }else {
         Write-Output "Incorrect Selection"
         Write-Output " "
-        optDNS
+        dnsMainreturn
     }
 }
 
-function opt2DNS{
+function manage2DNS{
 
     $dnsopt2 = Read-Host "Shall We Assign a DNS Y/N"
     if($dnsopt2 -eq "Y"){
@@ -137,7 +141,7 @@ function opt2DNS{
     }else{
         Write-Output "Incorrect Selection"
         Write-Output " "
-        opt2DNS
+        dnsMainreturn
     }
 }
         
@@ -171,13 +175,13 @@ function dnsMainreturn {
     }elseif ($dnsReturn -eq "y") {
         mainmenu
     }elseif ($dnsReturn -eq "N") {
-        setDNS
+        manageDNS
     }elseif ($dnsReturn -eq "n") {
-        setDNS
+        manageDNS
     }else {
         Write-Output "Incorrect selection"
         Write-Output " "
-        setDNS
+        dnsMainreturn
     }
     
 }
@@ -185,8 +189,9 @@ function dnsMainreturn {
 ##############################################################################
 #  Create OUs                                                                          
 ##############################################################################
-function createOU {
-     
+function manageOU {
+     Write-Output "Hello "
+     Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName -A
 }
 
 
