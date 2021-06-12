@@ -38,7 +38,7 @@ function mainmenu {
     }elseif ($userinput -eq 6) {
         installRAD
     }else {
-        Write-Output "In correct Selection"
+        Write-Output "In correct Selection `n"
         mainmenu
     }
 }
@@ -64,6 +64,7 @@ function installAD {
 ##############################################################################
 function setStaticIP{
 
+    Write-Output "Manage IP `n"
     Write-Output "Enter Static IP:"
     $staticIPadd = Read-Host " "
     Write-Output "Enter Gateway:"
@@ -83,8 +84,7 @@ function setStaticIP{
     }elseif ($statConfirm -eq "m") {
         mainmenu
     }else {
-        Write-Output "Incorrect Selection"
-        Write-Output " "
+        Write-Output "Incorrect Selection `n"
         setStaticIP
     }
     
@@ -96,7 +96,8 @@ function setStaticIP{
 # set ip address between "" use a , for two addresses                                                            
 ##############################################################################
 function manageDNS {
-
+    
+    Write-Output "Manage DNS `n"
     Write-Output "Checking if DNS Role is currently Installed"
     Get-WindowsFeature | where {($_.name -like "DNS")}
     $dnsopt1 = Read-Host "Does DNS need to be installed Y/N | M for main menu"
@@ -117,8 +118,7 @@ function manageDNS {
     }elseif ($dnsopt1 -eq "m") {
         mainmenu
     }else {
-        Write-Output "Incorrect Selection"
-        Write-Output " "
+        Write-Output "Incorrect Selection `n"
         dnsMainreturn
     }
 }
@@ -139,8 +139,7 @@ function manage2DNS{
         Write-Output " "
         mainmenu
     }else{
-        Write-Output "Incorrect Selection"
-        Write-Output " "
+        Write-Output "Incorrect Selection `n"
         dnsMainreturn
     }
 }
@@ -163,8 +162,7 @@ function setDNS{
     }elseif ($dnsopt3 -eq "n") {
         setDNS
     }else{
-        Write-Output "Incorrect Selection"
-        Write-Output " "
+        Write-Output "Incorrect Selection `n"
         dnsMainreturn
 }
 
@@ -179,21 +177,46 @@ function dnsMainreturn {
     }elseif ($dnsReturn -eq "n") {
         manageDNS
     }else {
-        Write-Output "Incorrect selection"
-        Write-Output " "
+        Write-Output "Incorrect selection `n"
         dnsMainreturn
     }
     
 }
 }
 ##############################################################################
-#  Create OUs                                                                          
+#  Manage OUs                                                                          
 ##############################################################################
 function manageOU {
-     Write-Output "Hello "
-     Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName -A
+     Write-Output "Manage Oganizational Units `n"
+     Write-Output "1. List Current OUs"
+     Write-Output "2. Add OU"
+     Write-Output "3. Delete OU"
+     Write-Output "4. Return To Main Menu"
+     $OUopt = Read-Host "Option "
+     if ($OUopt -eq 1){
+         Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName -A
+     }elseif ($OUopt -eq 2) {
+         addOU
+     }elseif ($OUopt -eq 3) {
+         delOU 
+     }elseif ($OUopt -eq 4) {
+         mainmenu
+     }else{
+         Write-Output "Inocrrect Selection"
+         manageOU
+     }
+     
 }
 
+function addOU {
+    $ouNAME = Read-Host "Enter Organizational Unit Name "
+    New-ADOrganizationalunit -Name $ouName
+    Get-ADOrganizationalUnit "OU=$ouName"
+}
+
+function delOU {
+
+}
 
 ##############################################################################
 #  Add Users                                                                           
