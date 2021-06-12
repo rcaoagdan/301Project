@@ -91,16 +91,14 @@ function manageIP {
     }
 }
 function setStaticIP{
-    Write-Output "Enter Static IP:"
-    $staticIPadd = Read-Host " "
-    Write-Output "Enter Gateway:"
-    $gatewayIP = Read-Host " "
+    $staticIPadd = Read-Host "Enter Static IP"
+    $gatewayIP = Read-Host "Enter Gateway"
     confrimIP
 }
 
 function confrimIP {
     Write-Output " The Static IP is : $staticIPadd and the Gateway : $gatewayIP"
-    $statConfirm = Read-Host "Confirm Y/N | M for main menu"
+    $statConfirm = Read-Host "Confirm Y/N "
     if($statConfirm -eq "Y"){
         New-NetIPAddress -IPAddress "$staticIPadd" -PrefixLength 24 -DefaultGateway "$gatewayIP" -InterfaceIndex(Get-NetAdapter).InterfaceIndex
     }elseif ($statConfirm -eq "y") {
@@ -109,10 +107,6 @@ function confrimIP {
         setStaticIP
     }elseif ($statConfirm -eq "n") {
         setStaticIP
-    }elseif ($statConfirm -eq "M") {
-        mainmenu
-    }elseif ($statConfirm -eq "m") {
-        mainmenu
     }else {
         Write-Output "Incorrect Selection `n"
         confrimIP
@@ -173,11 +167,8 @@ function manage2DNS{
         
 
 function setDNS{
-
-    Write-Output "Please Enter IP Address for DNS"
-    $servIP = Read-Host " "
-    Write-Output "Please Enter Secondary IP Address for DNS"
-    $servIP2 = Read-Host " "
+    $servIP = Read-Host "Enter IP Address for DNS "
+    $servIP2 = Read-Host "Enter Secondary IP Address "
     confirmDNS
 }
 function confirmDNS {
