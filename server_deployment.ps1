@@ -26,10 +26,12 @@ function mainmenu {
     $userinput = Read-Host "Option"
 
     if($userinput -eq 1){
+        Write-Output "Installing Active Directory `n"
         installAD
     }elseif ($userinput -eq 2) {
         setStaticIP
     }elseif ($userinput -eq 3) {
+        Write-Output "Manage DNS `n"
         manageDNS
     }elseif ($userinput -eq 4) {
         manageOU
@@ -97,7 +99,6 @@ function setStaticIP{
 ##############################################################################
 function manageDNS {
     
-    Write-Output "Manage DNS `n"
     Write-Output "Checking if DNS Role is currently Installed"
     Get-WindowsFeature | where {($_.name -like "DNS")}
     $dnsopt1 = Read-Host "Does DNS need to be installed Y/N | M for main menu"
@@ -195,6 +196,7 @@ function manageOU {
      $OUopt = Read-Host "Option "
      if ($OUopt -eq 1){
          Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName -A
+         manageOU
      }elseif ($OUopt -eq 2) {
          addOU
      }elseif ($OUopt -eq 3) {
@@ -211,11 +213,37 @@ function manageOU {
 function addOU {
     $ouNAME = Read-Host "Enter Organizational Unit Name "
     New-ADOrganizationalunit -Name $ouName
-    Get-ADOrganizationalUnit "OU=$ouName"
+    $ouOPT2 = Read-Host "Would you like to add another Y/N?"
+    if ($OUopt2 -eq "Y"){
+        addOU
+    }elseif ($OUopt2 -eq "y") {
+        addOU
+    }elseif ($OUopt2 -eq "N") {
+        manageOU
+    }elseif ($OUopt2 -eq "n") {
+       manageOU
+    }else{
+        Write-Output "Inocrrect Selection"
+        manageOU
+    }
 }
 
 function delOU {
-
+    $ouDEL = Read-Host "Enter Organizational Unit Name "
+    Remove-ADOrganizationalunit -Identity $ouDEL
+    $ouOPT3 = Read-Host "Would you like to Remove another Y/N?"
+    if ($OUopt3 -eq "Y"){
+        addOU
+    }elseif ($OUopt3 -eq "y") {
+        addOU
+    }elseif ($OUopt3 -eq "N") {
+        manageOU
+    }elseif ($OUopt3 -eq "n") {
+       manageOU
+    }else{
+        Write-Output "Inocrrect Selection"
+        manageOU
+    }
 }
 
 ##############################################################################
