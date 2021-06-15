@@ -37,7 +37,7 @@ function mainmenu {
         manageOU
     }elseif ($userinput -eq 5) {
         Write-Output " "
-        createUSER
+        manageUSER
     }else {
         Write-Output "In correct Selection `n"
         mainmenu
