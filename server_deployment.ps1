@@ -175,7 +175,8 @@ function setDNS{
     $servIP = Read-Host "Enter IP Address for DNS "
     $servIP2 = Read-Host "Enter Secondary IP Address "
     confirmDNS
-}Ifunction confirmDNS {
+}
+function confirmDNS {
     Write-Output "$servIP & $servIP2 will be set for DNS"
     $dnsopt3 = Read-Host "Confirm Y/N"
     if ($dnsopt3 -eq "Y") {
@@ -318,7 +319,7 @@ function confirmUSER {
    }else{
        Write-Output "Inocorrect Selection"
        confirmUSER
-}
+   }
 
 }
 
