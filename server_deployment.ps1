@@ -37,7 +37,7 @@ function mainmenu {
         manageOU
     }elseif ($userinput -eq 5) {
         Write-Output " "
-        manageUSER
+        manageUSERS
     }else {
         Write-Output "In correct Selection `n"
         mainmenu
@@ -289,17 +289,17 @@ function listUsers {
 
 function redoList {
     $listuseropt = Read-Host "Would You like to view another Y/N? `n"
-    if( $userInfo -eq "Y"){
+    if( $listuseropt -eq "Y"){
         listUsers
-    }elseif ($userInfo -eq "y") {
+    }elseif ($listuseropt -eq "y") {
          listUsers
-    }elseif ($userInfo -eq "N") {
+    }elseif ($listuseropt -eq "N") {
         manageUSERS
-    }elseif ($userInfo -eq "n") {
+    }elseif ($listuseropt -eq "n") {
         manageUSERS
     }else {
         Write-Output "Incorrect Selection"
-        
+        redoList
     }
 }
 function createUSER {
