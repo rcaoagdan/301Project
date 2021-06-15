@@ -10,7 +10,6 @@
 #   -Creates an AD Forest
 #   -Creates Organizational Units (OU)
 #   -Creates users
-#   -RADIUS
 
 ######################################################################################################
 # main menu                                                                   
