@@ -261,7 +261,7 @@ function manageUSERS {
     Write-Output "1. User Information"
     Write-Output "2. Add Users"
     Write-Output "3. Remove Users"
-    Write-Output "4. Main Menue"
+    Write-Output "4. Main Menu"
     $userOPT = Read-Host "Option:"
     if ($userOPT -eq 1){
         listUsers
@@ -282,9 +282,25 @@ function manageUSERS {
 }
 
 function listUsers {
-   $unserInfo = Read-Host "Enter Name"
-   Get-ADUser -Identity $unserInfo -Properties *
-    
+   $userInfo = Read-Host "Enter Full Name (First and Last)"
+   Get-ADUser -Filter "Name -like '$userInfo'"
+   redoList   
+}
+
+function redoList {
+    $listuseropt = Read-Host "Would You like to view another Y/N? `n"
+    if( $userInfo -eq "Y"){
+        listUsers
+    }elseif ($userInfo -eq "y") {
+         listUsers
+    }elseif ($userInfo -eq "N") {
+        manageUSERS
+    }elseif ($userInfo -eq "n") {
+        manageUSERS
+    }else {
+        Write-Output "Incorrect Selection"
+        
+    }
 }
 function createUSER {
    $firstName = Read-Host "First Name"
