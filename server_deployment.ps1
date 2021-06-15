@@ -55,9 +55,11 @@ function mainmenu {
 # Renames Server   
 ##############################################################################
 function installAD {
+    $dName = Read-Host "Enter Domain Name:"
+    $dForest = Read-Host "Enter Domain Net Bios Name"
     Get-WindowsFeature -Name AD-Domain-Services | Install-WindowsFeature
     Import-Module ADDSDeployment
-    Install-ADDSForest -DomainName GlobeXPrimary.local -DomainNetbiosName GlobeXPrimary 
+    Install-ADDSForest -DomainName "$dname" -DomainNetbiosName "$dForest"
 }
 
 
@@ -173,8 +175,7 @@ function setDNS{
     $servIP = Read-Host "Enter IP Address for DNS "
     $servIP2 = Read-Host "Enter Secondary IP Address "
     confirmDNS
-}
-function confirmDNS {
+}Ifunction confirmDNS {
     Write-Output "$servIP & $servIP2 will be set for DNS"
     $dnsopt3 = Read-Host "Confirm Y/N"
     if ($dnsopt3 -eq "Y") {
@@ -250,7 +251,7 @@ function delOU {
     }elseif ($OUopt3 -eq "n") {
        manageOU
     }else{
-        Write-Output "Inocrrect Selection"
+        Write-Output "Inocorrect Selection"
         manageOU
     }
 }
@@ -258,16 +259,69 @@ function delOU {
 ##############################################################################
 #  Add Users                                                                           
 ##############################################################################
+function manageUSERS {
+    Write-Output "User Menu"
+    Write-Output "1. List Current Users"
+    Write-Output "2. Add Users"
+    Write-Output "3. Remove Users"
+    Write-Output "4. Main Menue"
+    $userOPT = Read-Host "Option:"
+    if ($userOPT -eq 1){
+        listUsers
+        manageUSERS
+    }elseif ($userOPT -eq 2) {
+        Write-Output "Add Users"
+        createUSER
+    }elseif ($userOPT -eq 3) {
+        removeusers
+    }elseif ($userOPT -eq 4) {
+        Write-Output " "
+        mainmenu
+    }
+    else {
+        Write-Output "Incorrect Input"
+        manageUSERS
+    }
+
+}
+
+
 function createUSER {
+   $firstName = Read-Host "First Name"
+   $lastName = Read-Host "Last Name"
+   $fullName = "$firstName $lastName"
+   $userOU = Read-Host "Enter OU "
+   $newUser = Read-Host "Username"
+   $passwrd = Read-Host "Enter Paswword" -AsSecureString
+   confirmUSER
+}
+
+function confirmUSER {
+   Write-Output " "
+   Write-Output "Confirm"
+   Write-Output "First Name : $firstName"
+   Write-Output "Last Name: $lastName"
+   Write-Output "Organizational Unit: $userOU"
+   Write-Output "Username: $userOU"
+   Write-Output "Password: $passwrd"
+   $userOpt2 = Read-Host "Information Correct Y/N"
+   if ($userOpt2 -eq "Y"){
+    New-ADUser -Name $fullName -GivenName $firstName -Surname $lastName -Path "OU =$userOU,DC=GlobeXPrimary,DC=Local" -SamAccountName $newUser -AccountPassword $passwrd  -Enabled $True
+   }elseif ($userOpt2 -eq "y") {
+    New-ADUser -Name $fullName -GivenName $firstName -Surname $lastName -Path "OU =$userOU,DC=GlobeXPrimary,DC=Local" -SamAccountName $newUser -AccountPassword $passwrd  -Enabled $True
+   }elseif ($userOpt2 -eq "N") {
+       Write-Output "Add User"
+       createUSER
+   }elseif ($userOpt2 -eq "n") {
+       Write-Output "Add User"
+       createUSER
+   }else{
+       Write-Output "Inocorrect Selection"
+       confirmUSER
+}
 
 }
 
-##############################################################################
-# RADIUS                                                                        
-##############################################################################
-function installRAD {
-
-}
 
 ##############################################################################
 #  Main                                                                          
