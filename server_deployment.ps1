@@ -22,7 +22,6 @@ function mainmenu {
     Write-Output "3. Manage DNS"
     Write-Output "4. Manage Organizational Unit"
     Write-Output "5. Mange Users"
-    Write-Output "6. Install RADIUS"
     $userinput = Read-Host "Option"
     if($userinput -eq 1){
         Write-Output "Installing Active Directory `n"
@@ -39,9 +38,6 @@ function mainmenu {
     }elseif ($userinput -eq 5) {
         Write-Output " "
         createUSER
-    }elseif ($userinput -eq 6) {
-        Write-Output " "
-        installRAD
     }else {
         Write-Output "In correct Selection `n"
         mainmenu
@@ -262,14 +258,13 @@ function delOU {
 ##############################################################################
 function manageUSERS {
     Write-Output "User Menu"
-    Write-Output "1. List Current Users"
+    Write-Output "1. User Information"
     Write-Output "2. Add Users"
     Write-Output "3. Remove Users"
     Write-Output "4. Main Menue"
     $userOPT = Read-Host "Option:"
     if ($userOPT -eq 1){
         listUsers
-        manageUSERS
     }elseif ($userOPT -eq 2) {
         Write-Output "Add Users"
         createUSER
@@ -286,7 +281,11 @@ function manageUSERS {
 
 }
 
-
+function listUsers {
+   $unserInfo = Read-Host "Enter Name"
+   Get-ADUser -Identity $unserInfo -Properties *
+    
+}
 function createUSER {
    $firstName = Read-Host "First Name"
    $lastName = Read-Host "Last Name"
