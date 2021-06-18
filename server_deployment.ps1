@@ -38,7 +38,7 @@ function mainmenu {
         Write-Output " "
         manageUSERS
     }else {
-        Write-Output "In correct Selection `n"
+        Write-Output "Incorrect Selection `n"
         mainmenu
     }
 }
@@ -83,7 +83,7 @@ function manageIP {
         Write-Output " "
         mainmenu
     }else{
-        Write-Output "Incorrect Selection `n"
+        Write-Output "Incorrect Input `n"
         manageIP
     }
 }
@@ -107,7 +107,7 @@ function confrimIP {
     }elseif ($statConfirm -eq "n") {
         setStaticIP
     }else {
-        Write-Output "Incorrect Selection `n"
+        Write-Output "Incorrect Input `n"
         confrimIP
     }
 }
@@ -136,7 +136,7 @@ function manageDNS {
     }elseif ($dnsopt1 -eq "n") {
        currentDNS     
     }else {
-        Write-Output "Incorrect Selection"
+        Write-Output "Incorrect Input `n"
         manageDNS
     }
 }
@@ -160,7 +160,7 @@ function manage2DNS{
         Write-Output "Returning to Main Menu"
         mainmenu
     }else{
-        Write-Output "Incorrect Selection `n"
+        Write-Output "Incorrect Input `n"
         manage2DNS
     }
 }
@@ -183,7 +183,7 @@ function confirmDNS {
     }elseif ($dnsopt3 -eq "n") {
         setDNS
     }else{
-        Write-Output "Incorrect Selection `n"
+        Write-Output "Incorrect Input `n"
         confirmDNS
     }
 }
@@ -195,8 +195,7 @@ function manageOU {
      Write-Output "Manage Oganizational Units `n"
      Write-Output "1. List Current OUs"
      Write-Output "2. Add OU"
-     Write-Output "3. Delete OU"
-     Write-Output "4. Return To Main Menu"
+     Write-Output "3. Return To Main Menu "
      $OUopt = Read-Host "Option "
      if ($OUopt -eq 1){
          Get-ADOrganizationalUnit -Filter 'Name -like "*"' | Format-Table Name, DistinguishedName -A
@@ -204,11 +203,9 @@ function manageOU {
      }elseif ($OUopt -eq 2) {
          addOU
      }elseif ($OUopt -eq 3) {
-         delOU 
-     }elseif ($OUopt -eq 4) {
          mainmenu
      }else{
-         Write-Output "Inocrrect Selection"
+         Write-Output "Incorrect Input `n"
          manageOU
      }
      
@@ -228,29 +225,11 @@ function addOU {
     }elseif ($OUopt2 -eq "n") {
        manageOU
     }else{
-        Write-Output "Inocrrect Selection"
+        Write-Output "Incorrect Input `n"
         manageOU
     }
 }
 
-function delOU {
-    $ouDEL = Read-Host "Enter Organizational Unit Name "
-    Get-ADOrganizationalUnit -Identity "OU=$ouDEL,DC=GlobeXPrimary,DC=Local" | set-ADOrganizationalUnit -ProtectedFromAccidentalDeletion $false
-    Remove-ADOrganizationalunit -Identity "OU=$ouDEL,DC=GlobeXPrimary,DC=Local" -Confirm:$false
-    $ouOPT3 = Read-Host "Would you like to Remove another Y/N?"
-    if ($OUopt3 -eq "Y"){
-        addOU
-    }elseif ($OUopt3 -eq "y") {
-        addOU
-    }elseif ($OUopt3 -eq "N") {
-        manageOU
-    }elseif ($OUopt3 -eq "n") {
-       manageOU
-    }else{
-        Write-Output "Inocorrect Selection"
-        manageOU
-    }
-}
 
 ##############################################################################
 #  Add Users                                                                           
@@ -274,7 +253,7 @@ function manageUSERS {
         mainmenu
     }
     else {
-        Write-Output "Incorrect Input"
+        Write-Output "Incorrect Input `n"
         manageUSERS
     }
 
@@ -297,7 +276,7 @@ function redoList {
     }elseif ($listuseropt -eq "n") {
         manageUSERS
     }else {
-        Write-Output "Incorrect Selection"
+        Write-Output "Incorrect Input `n"
         redoList
     }
 }
@@ -331,7 +310,7 @@ function confirmUSER {
        Write-Output "Add User"
        createUSER
    }else{
-       Write-Output "Inocorrect Selection"
+       Write-Output "Incorrect Input `n"
        confirmUSER
    }
 
