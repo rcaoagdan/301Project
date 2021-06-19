@@ -25,3 +25,4 @@ For this IT project, your primary point of contact will be Michael Scott, Chief 
 
 ## Documentation
 [Slide Deck](https://docs.google.com/presentation/d/1jG85hUpLL8TwquVFg7f52JxKGaV1VkAfnEY5DVeQzho/edit?usp=sharing) 
+[Executive Summary](https://docs.google.com/document/d/1lhsjdmDlYH2NFLsa9XUGHt3996Xg1-rYeGvMsKB7oIw/edit?usp=sharing)
