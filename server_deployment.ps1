@@ -237,8 +237,7 @@ function manageUSERS {
     Write-Output "User Menu"
     Write-Output "1. User Information"
     Write-Output "2. Add Users"
-    Write-Output "3. Remove Users"
-    Write-Output "4. Main Menu"
+    Write-Output "3. Main Menu"
     $userOPT = Read-Host "Option:"
     if ($userOPT -eq 1){
         listUsers
@@ -246,12 +245,8 @@ function manageUSERS {
         Write-Output "Add Users"
         createUSER
     }elseif ($userOPT -eq 3) {
-        removeusers
-    }elseif ($userOPT -eq 4) {
-        Write-Output " "
         mainmenu
-    }
-    else {
+    }else {
         Write-Output "Incorrect Input `n"
         manageUSERS
     }
