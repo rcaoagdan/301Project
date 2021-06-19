@@ -143,8 +143,7 @@ function manageDNS {
 
 function currentDNS {
     Write-Output "Current DNS Settings "
-    #Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex(Get-NetAdapter).InterfaceIndex
-    Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex 6
+    Get-DnsClientServerAddress -AddressFamily IPv4 -InterfaceIndex(Get-NetAdapter).InterfaceIndex
     manage2DNS
 }
 function manage2DNS{
@@ -260,26 +259,11 @@ function manageUSERS {
 }
 
 function listUsers {
-   $userInfo = Read-Host "Enter Full Name (First and Last)"
-   Get-ADUser -Filter "Name -like '$userInfo'"
-   redoList   
+   Get-ADUser -Filter * -SearchBase "DC=corp,DC=GlobeXPower,DC=local"
+   
 }
 
-function redoList {
-    $listuseropt = Read-Host "Would You like to view another Y/N? `n"
-    if( $listuseropt -eq "Y"){
-        listUsers
-    }elseif ($listuseropt -eq "y") {
-         listUsers
-    }elseif ($listuseropt -eq "N") {
-        manageUSERS
-    }elseif ($listuseropt -eq "n") {
-        manageUSERS
-    }else {
-        Write-Output "Incorrect Input `n"
-        redoList
-    }
-}
+
 function createUSER {
    $firstName = Read-Host "First Name"
    $lastName = Read-Host "Last Name"
@@ -301,8 +285,10 @@ function confirmUSER {
    $userOpt2 = Read-Host "Information Correct Y/N"
    if ($userOpt2 -eq "Y"){
     New-ADUser -Name $fullName -GivenName $firstName -Surname $lastName -Path "OU =$userOU,DC=GlobeXPrimary,DC=Local" -SamAccountName $newUser -AccountPassword $passwrd  -Enabled $True
+    manageUSERS
    }elseif ($userOpt2 -eq "y") {
     New-ADUser -Name $fullName -GivenName $firstName -Surname $lastName -Path "OU =$userOU,DC=GlobeXPrimary,DC=Local" -SamAccountName $newUser -AccountPassword $passwrd  -Enabled $True
+    manageUSERS
    }elseif ($userOpt2 -eq "N") {
        Write-Output "Add User"
        createUSER
