@@ -260,7 +260,7 @@ function manageUSERS {
 
 function listUsers {
    Get-ADUser -Filter * -SearchBase "DC=corp,DC=GlobeXPower,DC=local"
-   
+   manageUSERS
 }
 
 
